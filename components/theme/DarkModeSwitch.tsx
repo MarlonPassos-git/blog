@@ -96,6 +96,12 @@ export const DarkModeSwitch: React.FC<Props> = ({
 
   const uniqueMaskId = `circle-mask-${id}`
 
+  console.log({
+    checked,
+    moonColor,
+    sunColor,
+  })
+
   return (
     <animated.div style={{ display: 'flex' }}>
       <animated.svg

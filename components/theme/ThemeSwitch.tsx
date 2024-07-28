@@ -17,11 +17,13 @@ import { useOuterClick } from '../util/useOuterClick'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
+// import { useTheme } from 'next-themes'
+const Blank = () => <svg className="h-6 w-6" />
 
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const { theme, setTheme, mounted } = useTheme()
+  const { theme, setTheme, mounted, resolvedTheme, systemTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
   const menubarRef = useRef<HTMLDivElement>(null)
@@ -30,6 +32,12 @@ const ThemeSwitch = () => {
 
   useEffect(() => {
     setDarkModeChecked(theme === 'dark')
+
+    console.log({
+      theme,
+      resolvedTheme,
+      systemTheme,
+    })
   }, [theme])
 
   const handleThemeChange = (newTheme: string) => {
@@ -37,7 +45,7 @@ const ThemeSwitch = () => {
     setMenuOpen(false)
   }
 
-  if (!mounted) return null
+  if (!mounted) return <Blank />
 
   return (
     <div ref={menubarRef} className="mr-5">
