@@ -2,7 +2,7 @@
 title: Internationalization of V 2.0
 series:
   order: 4
-  title: "Blog Starter"
+  title: 'Blog Starter'
 date: '2023-11-17'
 lastmod: '2024-06-15'
 language: en
@@ -14,7 +14,7 @@ featured: true
 summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition and support for multiple languages.
 ---
 
-IMPORTANT NOTE: 
+IMPORTANT NOTE:
 
 This is still a WIP (Work In Progress).
 
@@ -69,24 +69,25 @@ This repository will sometimes be updated with new features (not present in the 
 All this can sometimes seem obsessive regarding the UI and details, -maybe too neat or a little overkill- but I also use this repository as a play and learning space.
 
 For now :
-- New "sidetoc" component :  display automatically the table of contents of your posts in a dedicated sidebar.
+
+- New "sidetoc" component : display automatically the table of contents of your posts in a dedicated sidebar.
 - Integration of email, theme, as well as a button to quickly copy the URL of the page you are on, with the kbar palette command.
-The motivation for this is having explored other command palette libraries, with some offering nested elements for 'Actions'. Unfortunately this is not possible with kbar, but it gave me new ideas!
+  The motivation for this is having explored other command palette libraries, with some offering nested elements for 'Actions'. Unfortunately this is not possible with kbar, but it gave me new ideas!
 - Multi-authors feature for "about" section: each author can have it's own about page available inside a dropdown menu on large screens, or displayed directly on small screens. If you want to turn it off and only use the "normal", classical about section, go to sitemetadata.js and set multiauthors to false. In any case, your main author now needs to have the field "default" set to true.
 - Featured section on home page for posts you want to pin to top : set featured to true (max two posts by default, can be modified in Featured.tsx file, in component folder) The program will pick the latest two posts with "featured : true." If no featured posts are available, this section will simply not be displayed!
 - Each tag now has its own pagination! If the number of posts is greater than the one you have defined (by default, set to 5) then a new page is automatically created for subsequent posts including the same tag.
 - Waline comment system now supported! It's probably the best open source comment system right now, with even i18n and many other great features! First, follow [the official tutorial](https://waline.js.org/en/guide/get-started/) to set up the comments database and your vercel server. There's many options available, so take the time to read their documentation. Since it's Vue based, it's still compatible with Next.js, and I created a new comment component. You'll find it in "walinecomponents" folder. I also added a new css file, and you can modify the style here if needed. Once you have deployed your application for comments, modify the sitemetadata.js file. Set "iscomments" property to false, set "iswaline"
-to true and set the url of your comments server accordingly in "walineServer". If your language is not supported by waline, make a PR to their repository or ask them kindly to add your own translation (provide it yourself first). This is what I did for supporting french, and this how we work in open source world!
+  to true and set the url of your comments server accordingly in "walineServer". If your language is not supported by waline, make a PR to their repository or ask them kindly to add your own translation (provide it yourself first). This is what I did for supporting french, and this how we work in open source world!
 
 - Series for your posts is now supported, see the deployed demo!
 
-Example of including this new feature : 
+Example of including this new feature :
 
 ```mdx
 title: Internationalization of V 2.0
 series:
-  order: 4 // You must add a number for the actual order of your post in your series
-  title: "Blog Starter" // You must add the same title to all of your posts from the same series
+order: 4 // You must add a number for the actual order of your post in your series
+title: "Blog Starter" // You must add the same title to all of your posts from the same series
 date: '2023-11-17'
 lastmod: '2023-11-17'
 language: en
@@ -462,13 +463,13 @@ export const config = {
 
 All posts are grouped within the “data/blog” folder.
 
-They are organized into subfolders: "data/blog/en" for English, and "data/blog/fr" for French. 
+They are organized into subfolders: "data/blog/en" for English, and "data/blog/fr" for French.
 You can name the subfolders for your languages as you want : with the current configuration in contentlayer.config.ts file, the slug for your posts is the filename of your post, without the .mdx extension. All your translated posts must have the same name as the originals ones, for handling purposes of translation.
 
-Example : 
+Example :
 
 En: "data/blog/en/code-sample.mdx"
-Fr: "data/blog/fr/code-sample.mdx"
+pt: "data/blog/fr/code-sample.mdx"
 
 Etc.
 
@@ -593,12 +594,12 @@ Metadata type = {
 /* Add or modify the title here depending on the chosen languages: */
 export const maintitle: Metadata = {
    en: 'Next.js i18n Starter Blog',
-  fr: 'Starter Blog Next.js i18n',
+  pt: 'Starter Blog Next.js i18n',
 }
 /* Add or modify the description here depending on the chosen languages: */
 export const maindescription: Metadata = {
    en: 'A blog created with Next.js, i18n and Tailwind.css',
-  fr: 'Un blog crée avec tailwind, i18n et next.js',
+  pt: 'Un blog crée avec tailwind, i18n et next.js',
 }
 ```
 
@@ -638,7 +639,7 @@ const projectsData: ProjectsData = {
      },
    ],
 
-    fr: [
+    pt: [
     {
       title: 'Un moteur de recherche',
       description: `Et si vous pouviez rechercher n'importe quelle information dans le monde ? Pages Web, images, vidéos

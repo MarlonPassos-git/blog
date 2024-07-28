@@ -2,10 +2,10 @@
 title: Internationalisation de la V 2.0
 series:
   order: 4
-  title: "Blog Starter"
+  title: 'Blog Starter'
 date: '2023-11-17'
 lastmod: '2024-06-15'
-language: fr
+language: pt
 tags: ['next-js', 'tailwind', 'guide', 'fonctionnalites', 'i18n']
 authors: ['tailsazimuth']
 images: ['/static/images/twitter-card.png']
@@ -69,25 +69,25 @@ Ce dépôt sera parfois mis à jour avec de nouvelles fonctionnalités (non pré
 Tout cela peut parfois sembler obsessionnel concernant l'interface et les détails, -peut-être trop soigné ou un peu surfait- mais j'utilise aussi ce dépôt comme un espace de jeu et d'apprentissage.
 
 Pour l'instant :
+
 - Nouveau composant "sidetoc" : affiche automatiquement la table des matières de vos articles dans une sidebar dédiée.
 - Intégration de l'email, du thème, ainsi qu'un bouton pour copier rapidement l'URL de la page sur laquelle vous vous trouvez, avec la commande kbar palette.
-La motivation pour cela est d'avoir exploré d'autres bibliothèques de palettes de commandes, certaines proposant des éléments imbriqués pour les 'Actions'. Malheureusement ce n'est pas possible avec kbar, mais cela m'a donné de nouvelles idées !
+  La motivation pour cela est d'avoir exploré d'autres bibliothèques de palettes de commandes, certaines proposant des éléments imbriqués pour les 'Actions'. Malheureusement ce n'est pas possible avec kbar, mais cela m'a donné de nouvelles idées !
 - Fonctionnalité multi-auteurs pour la section "à propos" : chaque auteur peut avoir sa propre page à propos disponible dans un menu déroulant sur les grands écrans, ou affichée directement sur les petits écrans. Si vous souhaitez la désactiver et n'utiliser que la section à propos "normale", classique, allez sur sitemetadata.js et définissez multiauthors sur false. Dans tous les cas, votre auteur principal doit maintenant avoir le champ "default" défini sur true.
 - Section Featured sur la page d'accueil pour les articles que vous souhaitez épingler en haut : définissez featured sur true (max deux articles par défaut, peut être modifié dans le fichier Featured.tsx, dans le dossier component) Le programme choisira les deux derniers articles avec "featured : true". Si aucun article en vedette n'est disponible, cette section ne sera tout simplement pas affichée !
 - Chaque tag a maintenant sa propre pagination ! Si le nombre d'articles est supérieur à celui que vous avez défini (par défaut, défini sur 5) alors une nouvelle page est automatiquement créée pour les articles suivants incluant le même tag.
 - Le système de commentaires Waline est maintenant pris en charge ! C'est probablement le meilleur système de commentaires open source du moment, avec même i18n et de nombreuses autres fonctionnalités intéressantes ! Tout d'abord, suivez [le tutoriel officiel](https://waline.js.org/en/guide/get-started/) pour configurer la base de données de commentaires et votre serveur vercel. Il existe de nombreuses options disponibles, alors prenez le temps de lire leur documentation. Comme il est basé sur Vue, il est toujours compatible avec Next.js, et j'ai créé un nouveau composant de commentaire. Vous le trouverez dans le dossier "walinecomponents". J'ai également ajouté un nouveau fichier css, et vous pouvez modifier le style ici si nécessaire. Une fois que vous avez déployé votre application pour les commentaires, modifiez le fichier sitemetadata.js. Définissez la propriété "iscomments" sur false, définissez "iswaline"
-sur true et définissez l'URL de votre serveur de commentaires en conséquence dans "walineServer". Si votre langue n'est pas prise en charge par waline, faites une demande de publication sur leur référentiel ou demandez-leur gentiment d'ajouter votre propre traduction (fournissez-la vous-même au préalable). C'est ce que j'ai fait pour soutenir le français, et c'est ainsi que nous travaillons dans le monde open source !
+  sur true et définissez l'URL de votre serveur de commentaires en conséquence dans "walineServer". Si votre langue n'est pas prise en charge par waline, faites une demande de publication sur leur référentiel ou demandez-leur gentiment d'ajouter votre propre traduction (fournissez-la vous-même au préalable). C'est ce que j'ai fait pour soutenir le français, et c'est ainsi que nous travaillons dans le monde open source !
 
 - Les séries pour vos articles sont désormais prises en charge, consultez la démo déployée!
 
-
-Exemple d'intégration de cette nouvelle fonctionnalité: 
+Exemple d'intégration de cette nouvelle fonctionnalité:
 
 ```mdx
 title: Internationalization of V 2.0
 series:
-  order: 4 // Vous devez ajouter un numéro pour l'ordre réel de votre publication dans votre série d'articles.
-  title: "Blog Starter" // Vous devez ajouter le même titre à tous vos articles de la même série
+order: 4 // Vous devez ajouter un numéro pour l'ordre réel de votre publication dans votre série d'articles.
+title: "Blog Starter" // Vous devez ajouter le même titre à tous vos articles de la même série
 date: '2023-11-17'
 lastmod: '2023-11-17'
 language: en
@@ -101,9 +101,9 @@ summary: Presentation of the Starter Blog Tailwind Next-js v2.0, with addition a
 - Composant de partage : vous ou vos utilisateurs pouvez partager vos articles de blog sur Facebook, Twitter, Linkedin, WhatsApp, Threads ou Telegram en toute simplicité ! Que serait un blog moderne de 2024 sans cette possibilité ?
 
 - Transitions de page fluides grâce à [Framer Motion](https://github.com/framer/motion) (consultez le fichier template.tsx dans le dossier app et jetez un œil à la documentation next.js suivante
-pour la fonctionnalité de fichier [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
-Remarque : il s'agit d'une implémentation basique mais efficace. Je vous encourage vivement à expérimenter framer-motion et son utilisation au sein du nouveau
-routeur. J'ai également ajouté un peu de Framer Motion à la fenêtre de contact de formspree et au composant ListLayoutWithTags.tsx
+  pour la fonctionnalité de fichier [template](https://nextjs.org/docs/app/api-reference/file-conventions/template))
+  Remarque : il s'agit d'une implémentation basique mais efficace. Je vous encourage vivement à expérimenter framer-motion et son utilisation au sein du nouveau
+  routeur. J'ai également ajouté un peu de Framer Motion à la fenêtre de contact de formspree et au composant ListLayoutWithTags.tsx
 
 - Nouveau composant MDX : excellent lecteur audio pour les fichiers mdx (au cas où vous feriez des podcasts, ou même de la musique), grâce à [react-h5-audio-player](https://github.com/lhz516/react-h5-audio-player)
 
@@ -148,17 +148,17 @@ app
     │     │     │
     │     │     ├── en
     │     │     │   ├── about.json
-    │     │     │   │   
+    │     │     │   │
     │     │     │   ├── home.json
-    │     │     │   │  
+    │     │     │   │
     │     │     │   └── ...
     │     │     └── fr
     │     │         ├── about.json
-    │     │         │   
+    │     │         │
     │     │         ├── home.json
-    │     │         │ 
+    │     │         │
     │     │         └── ...
-    │     │  
+    │     │
     │     │
     │     ├── client.ts
     │     ├── locales.js
@@ -175,10 +175,10 @@ C'est donc dans ce dossier i18n que se situe la logique principale pour l'intern
 Le sous-dossier "locales" contient les fichiers .json où vous définirez vos traductions, la convention étant de définir un fichier par page de votre site, avec le nom de la page concernée pour le nom du fichier json.
 Il y a également un fichier "common" : si vous ne spécifiez pas de "namespace" ou ns (le nom du fichier sans l'extension json) dans vos pages ou composants, les traductions seront piochées dans ce fichier par défaut.
 
-*Important : pour chaque langue, il doit y avoir un fichier correspondant avec le même nom, par exemple un fichier "about" pour "fr" et pour "en", etc. Ainsi que des clefs de traduction avec le même nom au sein
-de chaque fichier. 
+\*Important : pour chaque langue, il doit y avoir un fichier correspondant avec le même nom, par exemple un fichier "about" pour "fr" et pour "en", etc. Ainsi que des clefs de traduction avec le même nom au sein
+de chaque fichier.
 
-Exemple : 
+Exemple :
 
 En anglais dans le dossier "en":
 
@@ -206,16 +206,16 @@ En français dans le dossier "fr":
 
 - locales.js :
 
-Il s'agit du fichier où vous définirez les langues que vous souhaitez utiliser, ainsi que la langue par défaut: 
+Il s'agit du fichier où vous définirez les langues que vous souhaitez utiliser, ainsi que la langue par défaut:
 
 ```js:locales.js
 const fallbackLng = 'en' // langue par défaut
-const secondLng = 'fr' 
+const secondLng = 'fr'
 
 module.exports = { fallbackLng, secondLng }
 ```
 
-Vous pouvez ajouter autant de langues que souhaité: 
+Vous pouvez ajouter autant de langues que souhaité:
 
 ```js:locales.js
 /* Exemple d'ajout d'une 3ème langue :*/
@@ -228,7 +228,7 @@ module.exports = { fallbackLng, secondLng, thirdLng }
 
 Toutefois, cela nécessitera quelques étapes de configuration supplémentaires au sein d'autres fichiers (principalement des fichiers qui sont discutés dans cet article)
 
-Vous pouvez également intervertir la langue par défaut et la seconde langue : 
+Vous pouvez également intervertir la langue par défaut et la seconde langue :
 
 ```js:locales.js
 /* Exemple de modification de langue par défaut:*/
@@ -250,9 +250,9 @@ import { fallbackLng, secondLng } from './locales'
 export const locales = [fallbackLng, secondLng] as const
 /* Définition typescript de type pour nos locales :*/
 export type LocaleTypes = (typeof locales)[number]
-/* "Namespace" (ou ns) par défaut : les traductions seront piochées dans le fichier 
+/* "Namespace" (ou ns) par défaut : les traductions seront piochées dans le fichier
 common.json si aucun ns n'est spécifié dans vos composants ou pages: */
-export const defaultNS = 'common' 
+export const defaultNS = 'common'
 /* Fonction qui sera réutilisée dans les fichiers client.ts et server.ts: */
 export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
   return {
@@ -270,7 +270,7 @@ export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
 - client.ts et server.ts :
 
 Sans rentrer dans des détails complexes, ces deux fichiers exportent chacun
-une fonction pour la traduction (useTranslation côté client, createTranslation côté serveur), 
+une fonction pour la traduction (useTranslation côté client, createTranslation côté serveur),
 réutilisables dans vos pages et composants :
 
 ```ts:client.ts
@@ -316,10 +316,10 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { useTranslation } from 'app/[locale]/i18n/client'
 
 const ThemeSwitch = () => {
-  /* Utilisation du hook fourni par next.js pour récupérer la langue actuellement définie: */ 
+  /* Utilisation du hook fourni par next.js pour récupérer la langue actuellement définie: */
   const locale = useParams()?.locale as LocaleTypes
   /* Utilisation de la fonction de traduction côté client:
-   pas de namespace (ns) défini (crochets vide), par conséquent la traduction sera piochée 
+   pas de namespace (ns) défini (crochets vide), par conséquent la traduction sera piochée
    dans le fichier common.json */
   const { t } = useTranslation(locale, '')
   const [mounted, setMounted] = useState(false)
@@ -396,7 +396,7 @@ export default async function Footer({ params: { locale } }: Props) {
           <Link href="/">{siteMetadata.title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">      
+          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
        {t('theme')}
           </Link>
         </div>
@@ -406,13 +406,13 @@ export default async function Footer({ params: { locale } }: Props) {
 }
 ```
 
-Pour la création de nouveaux composants ou pages, vous devrez donc vous appuyer sur ces deux 
+Pour la création de nouveaux composants ou pages, vous devrez donc vous appuyer sur ces deux
 fonctions concernant vos traductions, selon que le composant soit rendu côté client, ou côté serveur.
 
 - Middleware.ts :
 
-I18n n'étant pas supporté nativement au sein du nouveau router, il s'agit d'un fichier essentiel au bon 
-fonctionnement de l'ensemble. Il est également essentiel d'utiliser le "matcher" 
+I18n n'étant pas supporté nativement au sein du nouveau router, il s'agit d'un fichier essentiel au bon
+fonctionnement de l'ensemble. Il est également essentiel d'utiliser le "matcher"
 (ici avec des valeurs inversées qui permettent d'exclure les dossiers et fichiers qui ne doivent pas
 être pris en charge par le middleware)
 
@@ -445,7 +445,7 @@ export function middleware(request: NextRequest) {
     /* Nous sommes sur la langue par défaut
     Réecriture pour que next.js comprenne */
 
-    // ex: la requête entrante est: /about 
+    // ex: la requête entrante est: /about
     // Informer Next.js qu'il devrait se comporter comme si c'était: /en/about
     return NextResponse.rewrite(new URL(`/${fallbackLng}${pathname}`, request.url))
   }
@@ -492,7 +492,7 @@ summary: résumé
 - contentlayer.config.ts :
 
 Au sein du fichier "contentlayer.config.ts" il y a donc des changements mineurs dûs à
-l'internationalisation : 
+l'internationalisation :
 
 ```
 export const Blog = defineDocumentType(() => ({
@@ -540,7 +540,7 @@ export const Authors = defineDocumentType(() => ({
   },
 ```
 
--Génération des tags : 
+-Génération des tags :
 
 Là aussi, il a été nécessaire de faire des modifications, afin de générer un objet .json
 avec des tags pour chaque langue.
@@ -569,7 +569,7 @@ function createTagCount(allBlogs) {
 }
 ```
 
-Note : si vous souhaitez ajouter d'autres langues (3, 4 ou même 5 langues), il vous faudra modifier la logique pour prendre en charge 
+Note : si vous souhaitez ajouter d'autres langues (3, 4 ou même 5 langues), il vous faudra modifier la logique pour prendre en charge
 ces nouvelles langues.
 
 ## Auteurs
@@ -593,12 +593,12 @@ type Metadata = {
 /* Ajoutez ou modifiez le titre ici selon les langues choisies: */
 export const maintitle: Metadata = {
   en: 'Next.js i18n Starter Blog',
-  fr: 'Starter Blog Next.js i18n',
+  pt: 'Starter Blog Next.js i18n',
 }
 /* Ajoutez ou modifiez la description ici selon les langues choisies: */
 export const maindescription: Metadata = {
   en: 'A blog created with Next.js, i18n and Tailwind.css',
-  fr: 'Un blog crée avec tailwind, i18n et next.js',
+  pt: 'Un blog crée avec tailwind, i18n et next.js',
 }
 ```
 
@@ -638,7 +638,7 @@ const projectsData: ProjectsData = {
     },
   ],
 
-  fr: [
+  pt: [
     {
       title: 'Un moteur de recherche',
       description: `Et si vous pouviez rechercher n'importe quelle information dans le monde ? Pages Web, images, vidéos
@@ -805,7 +805,7 @@ Il y a un problème lors de l'utilisation de traductions standard, j'ai donc mis
 ## Choses à faire :
 
 - Corriger la traduction dans la page 404. Ceci est lié au fonctionnement actuel de la fonction not-found,
-il faut donc attendre un correctif du côté de next-js voir ici : [i18n pour la page not-found](https://github.com/vercel/next.js/discussions/50518)
+  il faut donc attendre un correctif du côté de next-js voir ici : [i18n pour la page not-found](https://github.com/vercel/next.js/discussions/50518)
 
 - Corriger rss.mjs. Si vous trouvez une solution de votre côté, n'hésitez pas à ouvrir un PR !
 
@@ -820,9 +820,9 @@ Toute aide pour des améliorations et/ou des rapports de bugs est la bienvenue !
 Notes importantes :
 
 - J'utilise un composant Link personnalisé pour la sélection de la langue : je préfère cela à l'élément de sélection HTML (plus facile à personnaliser).
-Le petit inconvénient est qu'il nécessite plus de code. Si vous préférez, vous êtes libre d'adapter et d'utiliser l'élément select à la place, mais je
-Je le garderai tel quel pour le modèle.
+  Le petit inconvénient est qu'il nécessite plus de code. Si vous préférez, vous êtes libre d'adapter et d'utiliser l'élément select à la place, mais je
+  Je le garderai tel quel pour le modèle.
 
 - Ne mettez pas à jour les dépendances : cela cassera votre application car certaines choses doivent être corrigées du côté de ces bibliothèques
-​
-Auteur : [pxlsyl](https://pxlsyl.art)
+  ​
+  Auteur : [pxlsyl](https://pxlsyl.art)
