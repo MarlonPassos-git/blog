@@ -9,11 +9,9 @@ type HomeProps = {
 }
 
 export default async function Page(props: HomeProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)

@@ -11,11 +11,9 @@ type BlogPageProps = {
 }
 
 export async function generateMetadata(props: BlogPageProps): Promise<Metadata> {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   return genPageMetadata({
     title: 'Blog',
@@ -24,11 +22,9 @@ export async function generateMetadata(props: BlogPageProps): Promise<Metadata> 
 }
 
 export default async function BlogPage(props: BlogPageProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const { t } = await createTranslation(locale, 'home')
   const posts = allCoreContent(sortPosts(allBlogs))

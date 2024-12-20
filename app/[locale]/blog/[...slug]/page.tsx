@@ -54,12 +54,9 @@ async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): P
 }
 
 export async function generateMetadata(props: BlogPageProps): Promise<Metadata | undefined> {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    slug,
-    locale
-  } = params;
+  const { slug, locale } = params
 
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
@@ -117,12 +114,9 @@ export const generateStaticParams = async () => {
 }
 
 export default async function Page(props: BlogPageProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    slug,
-    locale
-  } = params;
+  const { slug, locale } = params
 
   const dslug = decodeURI(slug.join('/'))
   // Filter out drafts in production + locale filtering

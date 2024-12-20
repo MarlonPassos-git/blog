@@ -13,12 +13,9 @@ type AboutProps = {
 }
 
 export async function generateMetadata(props: AboutProps): Promise<Metadata | undefined> {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    authors,
-    locale
-  } = params;
+  const { authors, locale } = params
 
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
@@ -34,12 +31,9 @@ export async function generateMetadata(props: AboutProps): Promise<Metadata | un
 }
 
 export default async function Page(props: AboutProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    authors,
-    locale
-  } = params;
+  const { authors, locale } = params
 
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors

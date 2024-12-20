@@ -35,6 +35,5 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Do not run the middleware on the following paths
   // prettier-ignore
-  matcher:
-  '/((?!api|static|track|data|css|scripts|.*\\..*|_next).*|sitemap.xml)',
+  matcher: '/((?!api|static|track|data|css|scripts|.*\\..*|_next).*|sitemap.xml)',
 }

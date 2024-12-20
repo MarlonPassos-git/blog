@@ -10,11 +10,9 @@ type TagsProps = {
 }
 
 export async function generateMetadata(props: TagsProps): Promise<Metadata> {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const { t } = await createTranslation(locale, 'SEO')
   return genPageMetadata({
@@ -25,11 +23,9 @@ export async function generateMetadata(props: TagsProps): Promise<Metadata> {
 }
 
 export default async function Page(props: TagsProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)

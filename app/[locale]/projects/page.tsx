@@ -9,11 +9,9 @@ type ProjectsProps = {
 }
 
 export async function generateMetadata(props: ProjectsProps): Promise<Metadata> {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const { t } = await createTranslation(locale, 'projects')
   return genPageMetadata({
@@ -23,11 +21,9 @@ export async function generateMetadata(props: ProjectsProps): Promise<Metadata> 
 }
 
 export default async function Projects(props: ProjectsProps) {
-  const params = await props.params;
+  const params = await props.params
 
-  const {
-    locale
-  } = params;
+  const { locale } = params
 
   const { t } = await createTranslation(locale, 'projects')
   return (
