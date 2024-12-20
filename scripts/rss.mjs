@@ -1,20 +1,20 @@
-import { writeFileSync, mkdirSync } from 'fs'
+import { mkdirSync, writeFileSync } from 'fs'
 import path from 'path'
 import { slug } from 'github-slugger'
-import { escape } from 'pliny/utils/htmlEscaper.js'
-import siteMetadata from '../data/siteMetadata.js'
-import tagData from '../app/[locale]/tag-data.json' assert { type: 'json' }
-import { allBlogs } from '../.contentlayer/generated/index.mjs'
 import { sortPosts } from 'pliny/utils/contentlayer.js'
+import { escape as plinyEscape } from 'pliny/utils/htmlEscaper.js'
+import { allBlogs } from '../.contentlayer/generated/index.mjs'
+import tagData from '../src/app/[locale]/tag-data.json' assert { type: 'json' }
+import siteMetadata from '../src/data/siteMetadata.js'
 
 const defaultLocale = 'pt'
 
 const generateRssItem = (config, post, locale) => `
   <item>
     <guid>${config.siteUrl}${defaultLocale === locale ? '' : '/' + locale}/blog/${post.slug}</guid>
-    <title>${escape(post.title)}</title>
+    <title>${plinyEscape(post.title)}</title>
     <link>${config.siteUrl}${defaultLocale === locale ? '' : '/' + locale}/blog/${post.slug}</link>
-    ${post.summary ? `<description>${escape(post.summary)}</description>` : ''}
+    ${post.summary ? `<description>${plinyEscape(post.summary)}</description>` : ''}
     ${post.date ? `<pubDate>${new Date(post.date).toUTCString()}</pubDate>` : ''}
     <author>${config.email} (${config.author})</author>
     ${post.tags ? post.tags.map((t) => `<category>${t}</category>`).join('') : ''}
@@ -24,9 +24,9 @@ const generateRssItem = (config, post, locale) => `
 const generateRss = (config, posts, locale, page = 'feed.xml') => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title>${escape(config.title)}</title>
+      <title>${plinyEscape(config.title)}</title>
       <link>${config.siteUrl}${defaultLocale === locale ? '' : '/' + locale}/blog</link>
-      <description>${escape(config.description)}</description>
+      <description>${plinyEscape(config.description)}</description>
       <language>${locale}</language>
       <managingEditor>${config.email} (${config.author})</managingEditor>
       <webMaster>${config.email} (${config.author})</webMaster>

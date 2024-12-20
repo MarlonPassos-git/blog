@@ -6,10 +6,10 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
     './node_modules/pliny/**/*.js',
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,tsx}',
-    './layouts/**/*.{js,ts,tsx}',
-    './data/**/*.mdx',
+    './src/app/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,tsx}',
+    './src/layouts/**/*.{js,ts,tsx}',
+    './src/data/**/*.mdx',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
   theme: {

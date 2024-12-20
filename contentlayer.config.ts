@@ -1,34 +1,34 @@
-import {
-  defineDocumentType,
-  ComputedFields,
-  makeSource,
-  defineNestedType,
-} from 'contentlayer2/source-files'
 import { writeFileSync } from 'fs'
-import readingTime from 'reading-time'
-import { slug } from 'github-slugger'
 import path from 'path'
-import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
-// Remark packages
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import { remarkAlert } from 'remark-github-blockquote-alert'
 import {
-  remarkExtractFrontmatter,
-  remarkCodeTitles,
-  remarkImgToJsx,
+  ComputedFields,
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from 'contentlayer2/source-files'
+import { slug } from 'github-slugger'
+import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
+import {
   extractTocHeadings,
+  remarkCodeTitles,
+  remarkExtractFrontmatter,
+  remarkImgToJsx,
 } from 'pliny/mdx-plugins/index.js'
+import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import readingTime from 'reading-time'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeCitation from 'rehype-citation'
+import rehypeKatex from 'rehype-katex'
+import rehypePresetMinify from 'rehype-preset-minify'
+import rehypePrismPlus from 'rehype-prism-plus'
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeKatex from 'rehype-katex'
-import rehypeCitation from 'rehype-citation'
-import rehypePrismPlus from 'rehype-prism-plus'
-import rehypePresetMinify from 'rehype-preset-minify'
-import siteMetadata from './data/siteMetadata'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
-import { fallbackLng, secondLng } from './app/[locale]/i18n/locales'
+// Remark packages
+import remarkGfm from 'remark-gfm'
+import { remarkAlert } from 'remark-github-blockquote-alert'
+import remarkMath from 'remark-math'
+import { fallbackLng, secondLng } from './src/app/[locale]/i18n/locales'
+import siteMetadata from './src/data/siteMetadata'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -91,7 +91,7 @@ function createTagCount(allBlogs) {
     }
   })
 
-  writeFileSync('./app/[locale]/tag-data.json', JSON.stringify(tagCount))
+  writeFileSync('./src/app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
 
 function createSearchIndex(allBlogs) {
@@ -181,7 +181,7 @@ export const Authors = defineDocumentType(() => ({
 }))
 
 export default makeSource({
-  contentDirPath: 'data',
+  contentDirPath: 'src/data',
   documentTypes: [Blog, Authors],
   mdx: {
     cwd: process.cwd(),
