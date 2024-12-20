@@ -1,8 +1,8 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Marlon F. Passos',
-  author: 'Marlon F. Passos',
-  headerTitle: 'Marlon F. Passos',
+  title: 'Marlon Passos',
+  author: 'Marlon Passos',
+  headerTitle: 'Marlon Passos',
   description: 'A blog created with Next.js, i18n and Tailwind.css',
   language: 'pt',
   theme: 'system', // system, dark or light
