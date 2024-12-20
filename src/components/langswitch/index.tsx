@@ -16,7 +16,8 @@ const LangSwitch = () => {
 
   return (
     <div ref={menubarRef} className="relative inline-block text-left">
-      <Menu>
+      {/* https://github.com/tailwindlabs/headlessui/issues/3351#issuecomment-2443481916 */}
+      <Menu as="div">
         {({ open }) => (
           <>
             <MenuButton
