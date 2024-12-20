@@ -23,7 +23,7 @@ const Blank = () => <svg className="h-6 w-6" />
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
-  const { theme, setTheme, mounted, resolvedTheme, systemTheme } = useTheme()
+  const { theme, setTheme, mounted, resolvedTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
   const menubarRef = useRef<HTMLDivElement>(null)
@@ -31,14 +31,8 @@ const ThemeSwitch = () => {
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => {
-    setDarkModeChecked(theme === 'dark')
-
-    console.log({
-      theme,
-      resolvedTheme,
-      systemTheme,
-    })
-  }, [theme])
+    setDarkModeChecked(resolvedTheme === 'dark')
+  }, [resolvedTheme])
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme)
