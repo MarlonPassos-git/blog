@@ -15,6 +15,7 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
+import { MetadataProps } from 'types/metaData'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -26,7 +27,10 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export async function generateMetadata({ params: { locale } }): Promise<Metadata> {
+export async function generateMetadata(props: MetadataProps): Promise<Metadata> {
+  const params = await props.params
+  const { locale } = params
+
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {
@@ -71,13 +75,16 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
   }
 }
 
-export default function RootLayout({
-  children,
-  params: { locale },
-}: {
+export default async function RootLayout(props: {
   children: React.ReactNode
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }) {
+  const params = await props.params
+
+  const { locale } = params
+
+  const { children } = props
+
   return (
     <html
       lang={locale}

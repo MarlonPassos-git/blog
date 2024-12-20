@@ -9,12 +9,17 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { notFound } from 'next/navigation'
 
 type AboutProps = {
-  params: { authors: string[]; locale: LocaleTypes }
+  params: Promise<{ authors: string[]; locale: LocaleTypes }>
 }
 
-export async function generateMetadata({
-  params: { authors, locale },
-}: AboutProps): Promise<Metadata | undefined> {
+export async function generateMetadata(props: AboutProps): Promise<Metadata | undefined> {
+  const params = await props.params;
+
+  const {
+    authors,
+    locale
+  } = params;
+
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   if (!author) {
@@ -28,7 +33,14 @@ export async function generateMetadata({
   })
 }
 
-export default async function Page({ params: { authors, locale } }: AboutProps) {
+export default async function Page(props: AboutProps) {
+  const params = await props.params;
+
+  const {
+    authors,
+    locale
+  } = params;
+
   const authorSlug = decodeURI(authors.join('/'))
   const author = allAuthors.find((a) => a.slug === authorSlug && a.language === locale) as Authors
   const authorIndex = allAuthors.findIndex((p) => p.slug === authorSlug)

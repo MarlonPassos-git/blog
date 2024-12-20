@@ -6,10 +6,16 @@ import { createTranslation } from '../i18n/server'
 import { LocaleTypes } from '../i18n/settings'
 
 type TagsProps = {
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }
 
-export async function generateMetadata({ params: { locale } }: TagsProps): Promise<Metadata> {
+export async function generateMetadata(props: TagsProps): Promise<Metadata> {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const { t } = await createTranslation(locale, 'SEO')
   return genPageMetadata({
     title: 'Tags',
@@ -18,7 +24,13 @@ export async function generateMetadata({ params: { locale } }: TagsProps): Promi
   })
 }
 
-export default function Page({ params: { locale } }: TagsProps) {
+export default async function Page(props: TagsProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const tagCounts = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])

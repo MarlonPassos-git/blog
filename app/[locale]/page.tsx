@@ -5,10 +5,16 @@ import HomeLayout from '@/layouts/HomeLayout'
 import { LocaleTypes } from './i18n/settings'
 
 type HomeProps = {
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }
 
-export default async function Page({ params: { locale } }: HomeProps) {
+export default async function Page(props: HomeProps) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
   const sortedPosts = sortPosts(allBlogs)
   const posts = allCoreContent(sortedPosts)
   const filteredPosts = posts.filter((p) => p.language === locale)
