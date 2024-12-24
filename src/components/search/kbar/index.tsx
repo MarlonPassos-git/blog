@@ -1,10 +1,12 @@
 import type { Action } from 'kbar'
-import { KBarProvider } from 'kbar'
+import { KBarProvider, useKBar } from 'kbar'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation.js'
 import { CoreContent, MDXDocument } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
 import { FC, ReactNode, useEffect, useState } from 'react'
-import { KBarModal } from './KBarModal'
+
+const KBarModal = dynamic(() => import('./KBarModal'), { ssr: false, loading: () => null })
 
 export interface KBarSearchProps {
   searchDocumentsPath: string | false
@@ -81,8 +83,18 @@ export const KBarSearchProvider: FC<{
 
   return (
     <KBarProvider actions={defaultActions}>
-      <KBarModal actions={searchActions} isLoading={!dataLoaded} />
+      <A searchActions={searchActions} dataLoaded={dataLoaded} />
       {children}
     </KBarProvider>
   )
+}
+
+function A({ searchActions, dataLoaded }: any) {
+  const visualState = useKBar((s) => s.visualState)
+
+  if (visualState === 'hidden') {
+    return null
+  }
+
+  return <KBarModal actions={searchActions} isLoading={!dataLoaded} />
 }

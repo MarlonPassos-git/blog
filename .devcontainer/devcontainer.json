@@ -7,6 +7,7 @@
     },
     "ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store": {}
   },
+  "mounts": ["source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached"],
   "customizations": {
     "vscode": {
       "extensions": ["bradlc.vscode-tailwindcss", "unifiedjs.vscode-mdx", "biomejs.biome"],

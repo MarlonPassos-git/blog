@@ -1,5 +1,6 @@
 'use client'
 
+import type { JSX } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { ModalBody } from './CBody'
 import { CModal } from './CModal'

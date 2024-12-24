@@ -168,3 +168,5 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
     </>
   )
 }
+
+export default KBarModal

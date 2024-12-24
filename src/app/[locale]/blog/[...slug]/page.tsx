@@ -14,8 +14,13 @@ import { notFound } from 'next/navigation'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { allCoreContent, coreContent, sortPosts } from 'pliny/utils/contentlayer'
 
+type Params = {
+  slug: string[]
+  locale: LocaleTypes
+}
+
 interface BlogPageProps {
-  params: Promise<{ slug: string[]; locale: LocaleTypes }>
+  params: Promise<Params>
 }
 
 const defaultLayout = 'PostLayout'
@@ -25,7 +30,7 @@ const layouts = {
   PostBanner,
 }
 
-async function getPostFromParams({ params: { slug, locale } }: BlogPageProps): Promise<any> {
+async function getPostFromParams({ slug, locale }: Params): Promise<any> {
   const dslug = decodeURI(slug.join('/'))
   const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
 
@@ -130,7 +135,7 @@ export default async function Page(props: BlogPageProps) {
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = await getPostFromParams({ params: { slug, locale } })
+  const post = await getPostFromParams(params)
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
   const authorList = post.authors || author
   const authorDetails = authorList.map((author) => {
