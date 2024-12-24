@@ -1,6 +1,5 @@
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
-import { useContactForm } from 'components/formspree/useContactForm'
 import { useTheme } from 'components/theme/ThemeContext'
 import { useTagStore } from 'components/util/useTagStore'
 import siteMetadata from 'data/siteMetadata'
@@ -12,7 +11,6 @@ import { Toaster } from 'react-hot-toast'
 import { MailIcon, SearchIcon, SettingsIcon } from '../icons'
 import Button from './Button'
 import CopyButton from './CopyButton'
-import EmailForm from './Emailform'
 import RenderResults from './RenderResults'
 import Settings from './Settings'
 
@@ -29,17 +27,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
 
   useRegisterActions(actions, [actions])
-
-  const {
-    state,
-    handleSubmit,
-    name,
-    email,
-    message,
-    handleNameChange,
-    handleEmailChange,
-    handleMessageChange,
-  } = useContactForm()
 
   const { setTheme, mounted } = useTheme()
   const [showEmailForm, setShowEmailForm] = useState<boolean>(false)
@@ -134,19 +121,6 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                   t={t}
                 />
               </div>
-              {showEmailForm && (
-                <EmailForm
-                  state={state}
-                  handleSubmit={handleSubmit}
-                  name={name}
-                  email={email}
-                  message={message}
-                  handleNameChange={handleNameChange}
-                  handleEmailChange={handleEmailChange}
-                  handleMessageChange={handleMessageChange}
-                  t={t}
-                />
-              )}
               {showSettings && (
                 <Settings
                   t={t}

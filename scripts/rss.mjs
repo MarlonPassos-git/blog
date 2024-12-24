@@ -4,7 +4,7 @@ import { slug } from 'github-slugger'
 import { sortPosts } from 'pliny/utils/contentlayer.js'
 import { escape as plinyEscape } from 'pliny/utils/htmlEscaper.js'
 import { allBlogs } from '../.contentlayer/generated/index.mjs'
-import tagData from '../src/app/[locale]/tag-data.json' assert { type: 'json' }
+import tagData from '../src/app/[locale]/tag-data.json' with { type: 'json' }
 import siteMetadata from '../src/data/siteMetadata.js'
 
 const defaultLocale = 'pt'
@@ -64,7 +64,7 @@ async function generateRSS(config, allBlogs, locale, page = 'feed.xml') {
 }
 
 const rss = async () => {
-  const locales = ['en', 'fr']
+  const locales = ['en', 'pt']
   for (const locale of locales) {
     await generateRSS(siteMetadata, allBlogs, locale)
   }
