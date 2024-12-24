@@ -22,5 +22,6 @@
       }
     }
   },
+  "remoteUser": "root",
   "postCreateCommand": "pnpm i"
 }

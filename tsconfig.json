@@ -39,7 +39,9 @@
     "**/*.json",
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    // import types from node_modules
+    "@types/**/*"
   ],
   "exclude": ["node_modules"]
 }

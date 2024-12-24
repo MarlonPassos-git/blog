@@ -1,32 +1,32 @@
 ---
-title: Présentation des publications en plusieurs parties avec routage imbriqué
+title: Apresentando postagens em várias partes com roteamento aninhado
 date: '2021-05-02'
 language: pt
-tags: ['multi-auteurs', 'next-js', 'fonctionnalites']
-authors: ['tailsazimuth']
+tags: ['multi-autores', 'next-js', 'funcionalidades']
+authors: ['marlonPassos']
 draft: false
-summary: Le modèle de blog prend en charge les publications dans des sous-dossiers imbriqués. Cela peut être utilisé pour regrouper les publications de contenu similaire, par ex. un cours en plusieurs parties. Cet article est lui-même un exemple de routage imbriqué!
+summary: O modelo de blog suporta postagens em subpastas aninhadas. Isso pode ser usado para agrupar postagens de conteúdo semelhante, por exemplo, um curso em várias partes. Este artigo é um exemplo de roteamento aninhado!
 ---
 
-# Routes imbriquées
+# Rotas aninhadas
 
-Le modèle de blog prend en charge les publications dans des sous-dossiers imbriqués. Cela aide à l'organisation et peut être utilisé pour regrouper des publications de contenu similaire, par ex. une série en plusieurs parties. Cet article est lui-même un exemple d'itinéraire imbriqué! Il se trouve dans le dossier `/data/blog/nested-route`.
+O modelo de blog suporta postagens em subpastas aninhadas. Isso ajuda na organização e pode ser usado para agrupar postagens de conteúdo semelhante, por exemplo, uma série em várias partes. Este artigo é um exemplo de rota aninhada! Ele está localizado na pasta `/data/blog/nested-route`.
 
-## Comment?
+## Como?
 
-Simplifiez la création de plusieurs dossiers dans le dossier principal `/data/blog` et ajoutez-y vos fichiers `.md`/`.mdx`. Vous pouvez même créer quelque chose comme `/data/blog/nested-route/deeply-nested-route/my-post.md`
+Simplifique criando várias pastas na pasta principal `/data/blog` e adicione seus arquivos `.md`/`.mdx` nelas. Você pode até criar algo como `/data/blog/nested-route/deeply-nested-route/my-post.md`
 
-Nous utilisons Next.js catch all routes pour gérer les créations de routage et de chemin.
+Usamos rotas catch all do Next.js para lidar com a criação de rotas e caminhos.
 
-## Cas d'usage
+## Casos de uso
 
-Voici quelques raisons d'utiliser des itinéraires imbriqués:
+Aqui estão algumas razões para usar rotas aninhadas:
 
-- Organisation du contenu plus logique (les blogs seront toujours affichés en fonction de la date de création)
-- Articles en plusieurs parties
-- Différents sous-itinéraires pour chaque auteur
-- Internationalisation (bien qu'il serait recommandé d'utiliser le [routage i8n intégré à Next.js](https://nextjs.org/docs/advanced-features/i18n-routing))
+- Organização de conteúdo mais lógica (os blogs sempre serão exibidos com base na data de criação)
+- Artigos em várias partes
+- Diferentes sub-rotas para cada autor
+- Internacionalização (embora seja recomendável usar o [roteamento i8n integrado do Next.js](https://nextjs.org/docs/advanced-features/i18n-routing))
 
-## Note
+## Nota
 
-- Les liens des articles précédents/suivants en bas du modèle sont actuellement triés par date. On pourrait envisager de modifier le modèle pour renvoyer le lecteur au message précédent/suivant de la série, plutôt que par date.
+- Os links de postagens anteriores/próximas na parte inferior do modelo são atualmente classificados por data. Pode-se considerar modificar o modelo para direcionar o leitor para a postagem anterior/próxima da série, em vez de por data.

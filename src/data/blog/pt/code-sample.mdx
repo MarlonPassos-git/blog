@@ -1,39 +1,39 @@
 ---
-title: Exemple .md file
+title: Exemplo de arquivo .md
 date: '2016-03-08'
 language: pt
-tags: ['markdown', 'code', 'fonctionnalites']
-authors: ['tailsazimuth']
+tags: ['markdown', 'código', 'funcionalidades']
+authors: ['marlonPassos']
 draft: false
-summary: Exemple de fichier markdown avec blocs de code et coloration syntaxique
+summary: Exemplo de arquivo markdown com blocos de código e realce de sintaxe
 ---
 
-Un exemple de publication avec remark.
+Um exemplo de publicação com remark.
 
-## Mise en surbrillance en ligne
+## Realce em linha
 
-Exemple de mise en évidence en ligne `sum = parseInt(num1) + parseInt(num2)`
+Exemplo de realce em linha `sum = parseInt(num1) + parseInt(num2)`
 
-## Blocs de code
+## Blocos de código
 
-Du code Javascript
+Código Javascript
 
 ```javascript
 var num1, num2, sum
-num1 = prompt('Enter first number')
-num2 = prompt('Enter second number')
-sum = parseInt(num1) + parseInt(num2) // "+" means "add"
-alert('Sum = ' + sum) // "+" means combine into a string
+num1 = prompt('Digite o primeiro número')
+num2 = prompt('Digite o segundo número')
+sum = parseInt(num1) + parseInt(num2) // "+" significa "adicionar"
+alert('Soma = ' + sum) // "+" significa combinar em uma string
 ```
 
-Du code python 🐍
+Código python 🐍
 
 ```python
 def fib():
     a, b = 0, 1
-    while True:            # First iteration:
-        yield a            # yield 0 to start with and then
-        a, b = b, a + b    # a will now be 1, and b will also be 1, (0 + 1)
+    while True:            # Primeira iteração:
+        yield a            # yield 0 para começar e então
+        a, b = b, a + b    # a agora será 1, e b também será 1, (0 + 1)
 
 for index, fibonacci_number in zip(range(10), fib()):
      print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
