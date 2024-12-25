@@ -1,4 +1,25 @@
 {
-  "en": { "multi-author": 1, "next-js": 1, "feature": 1, "markdown": 1, "code": 1, "features": 1 },
-  "pt": { "multi-autores": 1, "next-js": 1, "funcionalidades": 2, "markdown": 1, "código": 1 }
+  "en": {
+    "markdown": 1,
+    "code": 1,
+    "features": 1,
+    "vtex": 1,
+    "vtex-io": 1,
+    "performance": 1,
+    "lighthouse": 1,
+    "multi-author": 1,
+    "next-js": 1,
+    "feature": 1
+  },
+  "pt": {
+    "markdown": 1,
+    "código": 1,
+    "funcionalidades": 2,
+    "vtex": 1,
+    "vtex-io": 1,
+    "peformace": 1,
+    "lightouse": 1,
+    "multi-autores": 1,
+    "next-js": 1
+  }
 }
