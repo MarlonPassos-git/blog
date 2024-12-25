@@ -1,0 +1,200 @@
+---
+title: O quão rápido é uma pagina vazia da VTEX IO
+date: '2022-12-24'
+language: pt
+tags: ['vtex', 'vtex io', 'peformace', "lightouse"]
+authors: ['marlonPassos']
+draft: true
+summary: Analisando o desempenho de uma página inicial em branco do VTEX IO removendo todo o conteúdo e otimizações.
+---
+
+Muitas vezes passamos horas e horas sofrendo ajustando alguns coisa no código para tentar conseguir ganhar alguns pontos nos relatorios de peformace do ligouse. Trabalhando com VTEX IO as coisas pioram mais ainda, pois não temos o controle do empacotador, nem do framework que roda por debaixo dos panos. Tem uma lenda de que é impossível pegar +90 pontos no mobile. 
+
+Por isso, quis tirar a limpo e saber o quão rápido é uma página home VTEX IO sem nada 🤔. Pensa comigo, num mundo utópico em que você consiga otimizar todo o componentes JS, CSS ele nunca vai ficar mais rápido do que uma página vazia sem nada. Por isso, eu quis tirar a prova a limpo.  
+## Setup 
+
+### Removendo conteúdo da página:
+
+Para fazer esse teste, eu peguei a página home e comentei todo o conteúdo dela:
+
+```json
+	"store.home": {
+		"blocks": [],
+		"parent": {
+			"header": "flex-layout.row#nothing",
+			"footer": "flex-layout.row#nothing"
+		}
+	},
+	"flex-layout.row#nothing": {
+		"children": [],
+		"props": {}
+	},
+```
+
+### Removendo classes utilitárias
+No arquivo `style.json` apaguei todas as cores / tamanhos que poderiam gerar classes customizadas com o builder do [tachyons](https://github.com/tachyons-css/tachyons/)
+
+```json
+{
+	"typeScale": [3, 2.25, 1.5, 1.25, 1, 0.875, 0.75],
+	"spacing": [0.125, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 8, 16],
+	"customMedia": [
+	],
+	"colors": {},
+	"semanticColors": {},
+	"borderWidths": [0, 0.125, 0.25, 0.5, 1, 2],
+	"borderRadius": [0, 0.125, 0.25, 0.5, 1],
+	"widths": [1, 2, 4, 8, 16],
+	"maxWidths": [1, 2, 4, 8, 16, 32, 48, 64, 96],
+	"heights": [1, 2, 4, 8, 16],
+	"sizes": [
+		{
+			"name": "small",
+			"value": 2
+		},
+		{
+			"name": "regular",
+			"value": 2.5
+		},
+		{
+			"name": "large",
+			"value": 3
+		}
+	],
+	"typography": {
+		"measure": [30, 34, 20],
+		"styles": {}
+	},
+	"opacity": [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05, 0.025, 0]
+}
+```
+### Removendo fontes:  
+
+No arquivo `font-face.css` apaguei todas as fontes cadastradas 
+
+```css
+// nothing
+```
+
+### Diminuindo o tamanho do SVG Sprites. 
+
+No arquivo `iconpack.svg` apaguei o conteúdo de todas as tags `<g> ... </g>`
+
+```svg
+<svg class="dn" height="0" version="1.1" width="0" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <g id="hpa-arrow-from-bottom"/>
+    <g id="bnd-logo"/>
+    <g id="hpa-arrow-to-bottom"/>
+    <g id="hpa-arrow-back"/>
+    <g id="hpa-calendar"/>
+    <g id="hpa-cart"/>
+    <g id="hpa-delete"/>
+    <g id="mpa-play"/>
+    <g id="mpa-pause"/>
+    <g id="sti-volume-on"/>
+    <g id="sti-volume-off"/>
+    <g id="hpa-profile"/>
+    <g id="hpa-save"/>
+    <g id="hpa-search">
+    </g>
+    <g id="hpa-hamburguer-menu"/>
+    <g id="hpa-location-marker"/>
+    <g id="hpa-telemarketing"/>
+    <g id="mpa-globe"/>
+    <g id="mpa-filter-settings"/>
+    <g id="mpa-single-item"/>
+    <g id="mpa-gallery"/>
+    <g id="mpa-list-items"/>
+    <g id="mpa-heart"/>
+    <g id="mpa-clone--outline"/>
+    <g id="mpa-clone--filled"/>
+    <g id="mpa-edit--outline"/>
+    <g id="mpa-bookmark--filled"/>
+    <g id="mpa-bookmark--outline"/>
+    <g id="mpa-edit--filled"/>
+    <g id="mpa-external-link--line"/>
+    <g id="mpa-external-link--outline"/>
+    <g id="mpa-eyesight--outline--off"/>
+    <g id="mpa-eyesight--filled--off"/>
+    <g id="mpa-eyesight--outline--on"/>
+    <g id="mpa-eyesight--filled--on"/>
+    <g id="mpa-filter--outline"/>
+    <g id="mpa-filter--filled"/>
+    <g id="mpa-minus--line"/>
+    <g id="mpa-minus--outline"/>
+    <g id="mpa-minus--filled"/>
+    <g id="mpa-plus--line"/>
+    <g id="mpa-plus--outline"/>
+    <g id="mpa-plus--filled"/>
+    <g id="mpa-remove"/>
+    <g id="mpa-swap"/>
+    <g id="mpa-arrows"/>
+    <g id="mpa-expand"/>
+    <g id="mpa-bag"/>
+    <g id="mpa-bars"/>
+    <g id="mpa-cog"/>
+    <g id="mpa-columns"/>
+    <g id="mpa-credit-card"/>
+    <g id="mpa-elypsis"/>
+    <g id="mpa-exchange"/>
+    <g id="mpa-export"/>
+    <g id="mpa-link"/>
+    <g id="mpa-settings"/>
+    <g id="mpa-store"/>
+    <g id="mpa-angle--down"/>
+    <g id="mpa-angle--up"/>
+    <g id="mpa-location-input"/>
+    <g id="inf-star">
+    </g>
+    <g id="inf-help--outline"/>
+    <g id="inf-help--filled"/>
+    <g id="inf-tooltip--outline"/>
+    <g id="inf-tooltip--filled"/>
+    <g id="inf-warning--outline"/>
+    <g id="inf-warning--filled"/>
+    <g id="nav-caret--down"/>
+    <g id="nav-caret--left"/>
+    <g id="nav-caret--right">
+    </g>
+    <g id="nav-caret--up">
+    </g>
+    <g id="nav-thin-caret--left">
+    </g>
+    <g id="nav-thin-caret--right">
+    </g>
+    <g id="nav-arrow--left"/>
+    <g id="nav-arrow--right"/>
+    <g id="nav-home"></g>
+    <g id="nav-plus"/>
+    <g id="nav-minus"/>
+    <g id="sti-loading"/>
+    <g id="sti-check--line"/>
+    <g id="sti-check--outline"/>
+    <g id="sti-check--filled"/>
+    <g id="sti-close--line"></g>
+    <g id="sti-close--outline"/>
+    <g id="sti-close--filled"/>
+    <g id="sti-clock"/>
+    <g id="sti-equals"/>
+    <g id="sti-discount"/>
+<g id="busca"></g>
+</svg>
+```
+
+> [!NOTE]
+> Highlights information that users should take into account, even when skimming.
+
+> NOTE
+> Highlights information that users should take into account, even when skimming.
+
+### Ativando configurações de desempenho no Admin da VTEX. 
+
+Ao acessar `/admin/cms/store` tenho algumas opções de performance ativas:
+
+![[Untitled design.jpg]]
+
+
+### Apagando todos os CSS
+
+Vou no diretório `css` e apago todos os arquivos.  `*.css` 

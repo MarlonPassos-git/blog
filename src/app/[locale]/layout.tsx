@@ -111,7 +111,7 @@ export default async function RootLayout(props: {
                 <Header />
                 <main className="mb-auto">{children}</main>
               </SearchProvider>
-              <Footer />
+              <Footer locale={locale} />
             </div>
           </SectionContainer>
         </ThemeProvider>

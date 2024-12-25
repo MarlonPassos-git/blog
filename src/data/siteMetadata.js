@@ -3,23 +3,16 @@ const siteMetadata = {
   title: 'Marlon Passos',
   author: 'Marlon Passos',
   headerTitle: 'Marlon Passos',
-  description: 'A blog created with Next.js, i18n and Tailwind.css',
+  description: '',
   language: 'pt',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog-i18n.vercel.app',
-  siteRepo: 'https://github.com/PxlSyl/tailwind-nextjs-starter-blog-i18n',
-  siteLogo: '/static/images/logo.png',
-  socialBanner: '/static/images/twitter-card.png',
+  siteUrl: 'https://blog.marlonpassos.com.br',
+  siteLogo: '/static/images/logo.svg',
+  socialBanner: '',
   // mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'marlonfelipepassv2@gmail.com',
   github: 'https://github.com/MarlonPassos-git',
-  // x: 'https://twitter.com/x',
-  // twitter: 'https://twitter.com/Twitter',
-  // facebook: 'https://facebook.com',
-  // youtube: 'https://youtube.com',
   linkedin: 'https://www.linkedin.com/in/marlon-passos-8a38061a8/',
-  // threads: 'https://www.threads.net',
-  // instagram: 'https://www.instagram.com',
   locale: 'pt',
   multiauthors: false,
   analytics: {
@@ -82,14 +75,6 @@ const siteMetadata = {
     kbarConfig: {
       searchDocumentsPath: 'search.json', // path to load documents to search
     },
-    // provider: 'algolia',
-    // algoliaConfig: {
-    //   // The application ID provided by Algolia
-    //   appId: 'R2IYF7ETH7',
-    //   // Public API key: it is safe to commit it
-    //   apiKey: '599cec31baffa4868cae4e79f180729b',
-    //   indexName: 'docsearch',
-    // },
   },
   // formspree support :
   //if set to false, simple "mailto"
@@ -98,7 +83,6 @@ const siteMetadata = {
   // waline support
   iswaline: false,
   walineServer: '',
-  // image:
 }
 
 module.exports = siteMetadata

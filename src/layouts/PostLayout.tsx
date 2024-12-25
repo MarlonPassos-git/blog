@@ -17,7 +17,6 @@ import { Toc } from 'pliny/mdx-plugins'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { ReactNode } from 'react'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
 
@@ -45,7 +44,7 @@ export default async function PostLayout({
   children,
   params: { locale },
 }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, language, series, toc } = content
+  const { path, slug, date, title, tags, language, series, toc } = content
   const basePath = path.split('/')[0]
   const { t } = await createTranslation(locale, 'home')
   const tableOfContents: Toc = toc as unknown as Toc
@@ -124,7 +123,7 @@ export default async function PostLayout({
                     {t('twitter')}
                   </Link>
                   {` • `}
-                  <Link href={editUrl(filePath)}>{t('github')}</Link>
+                  {/* <Link href={editUrl(filePath)}>{t('github')}</Link> */}
                 </div>
                 <Share title={title} slug={slug} />
                 <div

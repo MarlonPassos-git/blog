@@ -10,7 +10,6 @@ type ProjectsProps = {
 
 export async function generateMetadata(props: ProjectsProps): Promise<Metadata> {
   const params = await props.params
-
   const { locale } = params
 
   const { t } = await createTranslation(locale, 'projects')
@@ -22,10 +21,9 @@ export async function generateMetadata(props: ProjectsProps): Promise<Metadata> 
 
 export default async function Projects(props: ProjectsProps) {
   const params = await props.params
-
   const { locale } = params
-
   const { t } = await createTranslation(locale, 'projects')
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">

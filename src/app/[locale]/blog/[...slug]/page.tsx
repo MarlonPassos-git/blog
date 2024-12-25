@@ -1,5 +1,7 @@
 import 'css/prism.css'
 import 'katex/dist/katex.css'
+import 'remark-github-blockquote-alert/alert.css'
+
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { components } from 'components/mdxcomponents'
 import { allAuthors, allBlogs } from 'contentlayer/generated'
