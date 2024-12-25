@@ -1,6 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
+import { MetadataProps } from '@types/metaData'
 import SectionContainer from 'components/SectionContainer'
 import TwSizeIndicator from 'components/helper/TwSizeIndicator'
 import Footer from 'components/navigation/Footer'
@@ -14,7 +15,6 @@ import { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
-import { MetadataProps } from 'types/metaData'
 import { LocaleTypes, locales } from './i18n/settings'
 
 export async function generateStaticParams() {

@@ -5,8 +5,8 @@ export const locales = [fallbackLng, secondLng] as const
 export type LocaleTypes = (typeof locales)[number]
 export const defaultNS = 'common'
 
-export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
-  return {
+export function getOptions(locale = fallbackLng, ns = defaultNS) {
+  const options = {
     debug: false,
     supportedLngs: locales,
     fallbackLng,
@@ -14,5 +14,7 @@ export function getOptions(locale = fallbackLng, ns = defaultNS): InitOptions {
     fallbackNS: defaultNS,
     defaultNS,
     ns,
-  }
+  } satisfies InitOptions
+
+  return options
 }

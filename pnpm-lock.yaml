@@ -56,6 +56,9 @@ importers:
       i18next-browser-languagedetector:
         specifier: ^8.0.2
         version: 8.0.2
+      i18next-resources-for-ts:
+        specifier: ^1.5.0
+        version: 1.5.0
       i18next-resources-to-backend:
         specifier: ^1.2.1
         version: 1.2.1
@@ -3303,6 +3306,10 @@ packages:
 
   i18next-browser-languagedetector@8.0.2:
     resolution: {integrity: sha512-shBvPmnIyZeD2VU5jVGIOWP7u9qNG3Lj7mpaiPFpbJ3LVfHZJvVzKR4v1Cb91wAOFpNw442N+LGPzHOHsten2g==}
+
+  i18next-resources-for-ts@1.5.0:
+    resolution: {integrity: sha512-gzVYct/sMeeOzomK0+8nl7YSr61xiDzf4Kg51g7StBaXAaKE/Vb1CLNHZ8dY56sYz6qmbwHRYHqMPanGi0go4w==}
+    hasBin: true
 
   i18next-resources-to-backend@1.2.1:
     resolution: {integrity: sha512-okHbVA+HZ7n1/76MsfhPqDou0fptl2dAlhRDu2ideXloRRduzHsqDOznJBef+R3DFZnbvWoBW+KxJ7fnFjd6Yw==}
@@ -9192,6 +9199,11 @@ snapshots:
   i18next-browser-languagedetector@8.0.2:
     dependencies:
       '@babel/runtime': 7.26.0
+
+  i18next-resources-for-ts@1.5.0:
+    dependencies:
+      '@babel/runtime': 7.26.0
+      yaml: 2.6.1
 
   i18next-resources-to-backend@1.2.1:
     dependencies:

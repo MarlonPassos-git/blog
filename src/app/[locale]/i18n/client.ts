@@ -1,6 +1,6 @@
 'use client'
 
-import i18next, { i18n } from 'i18next'
+import i18next, { i18n, CustomTypeOptions } from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import { useEffect, useState } from 'react'
@@ -28,7 +28,10 @@ i18next
     preload: runsOnServerSide ? locales : [],
   })
 
-export function useTranslation(lng: LocaleTypes, ns: string) {
+export function useTranslation<T extends keyof CustomTypeOptions['resources']>(
+  lng: LocaleTypes,
+  ns: T
+) {
   const translator = useTransAlias(ns)
   const { i18n } = translator
 
@@ -36,8 +39,6 @@ export function useTranslation(lng: LocaleTypes, ns: string) {
   if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
     i18n.changeLanguage(lng)
   } else {
-    // Use our custom implementation when running on client side
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useCustomTranslationImplem(i18n, lng)
   }
   return translator

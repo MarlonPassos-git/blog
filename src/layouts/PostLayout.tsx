@@ -47,6 +47,7 @@ export default async function PostLayout({
   const { path, slug, date, title, tags, language, series, toc } = content
   const basePath = path.split('/')[0]
   const { t } = await createTranslation(locale, 'home')
+  const { t: tBlog } = await createTranslation(locale, 'blog')
   const tableOfContents: Toc = toc as unknown as Toc
   return (
     <>
@@ -141,7 +142,7 @@ export default async function PostLayout({
                   {tags && (
                     <div className="py-4 xl:py-8">
                       <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                        Tags
+                        {tBlog('tags')}
                       </p>
                       <div className="flex flex-wrap">
                         {tags.map((tag) => (
