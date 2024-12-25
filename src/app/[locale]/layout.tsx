@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { MetadataProps } from '@types/metaData'
+import { MetadataProps } from '@/types/metaData'
 import SectionContainer from 'components/SectionContainer'
 import TwSizeIndicator from 'components/helper/TwSizeIndicator'
 import Footer from 'components/navigation/Footer'

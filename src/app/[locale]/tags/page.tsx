@@ -28,7 +28,7 @@ export default async function Page(props: TagsProps) {
   const { locale } = params
   const { t } = await createTranslation(locale, 'common')
 
-  const tagCounts = tagData[locale]
+  const tagCounts: { [key: string]: number } = tagData[locale]
   const tagKeys = Object.keys(tagCounts)
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 

@@ -1,6 +1,7 @@
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import Link from 'components/mdxcomponents/Link'
 import Tag from 'components/tag'
+import { TFunction } from 'i18next'
 import { formatDate } from 'pliny/utils/formatDate'
 import React from 'react'
 
@@ -17,7 +18,7 @@ interface Post {
 interface PostListProps {
   posts: Post[]
   locale: LocaleTypes
-  t: (key: string) => string
+  t: TFunction<'home', undefined>
   maxDisplay: number
 }
 

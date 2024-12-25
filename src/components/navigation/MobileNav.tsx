@@ -95,7 +95,7 @@ const MobileNav = () => {
                 className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
                 onClick={onToggleNav}
               >
-                {t(`${link.title.toLowerCase()}`)}
+                {t(link.title.toLowerCase() as any)}
               </Link>
             </div>
           ))}

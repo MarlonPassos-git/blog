@@ -14,7 +14,7 @@ import {
   remarkExtractFrontmatter,
   remarkImgToJsx,
 } from 'pliny/mdx-plugins/index.js'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
+import { type MDXDocumentDate, allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import readingTime from 'reading-time'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCitation from 'rehype-citation'
@@ -72,8 +72,8 @@ const computedFields: ComputedFields = {
  * Add logic to your own locales and project
  */
 
-function createTagCount(allBlogs) {
-  const tagCount = {
+function createTagCount(allBlogs: MDXDocumentDate[]) {
+  const tagCount: Record<'en' | 'pt', Record<string, number>> = {
     [fallbackLng]: {},
     [secondLng]: {},
   }
@@ -94,7 +94,7 @@ function createTagCount(allBlogs) {
   writeFileSync('./src/app/[locale]/tag-data.json', JSON.stringify(tagCount))
 }
 
-function createSearchIndex(allBlogs) {
+function createSearchIndex(allBlogs: MDXDocumentDate[]) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
     siteMetadata.search.kbarConfig.searchDocumentsPath

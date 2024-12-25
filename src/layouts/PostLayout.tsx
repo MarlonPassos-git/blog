@@ -17,7 +17,7 @@ import { Toc } from 'pliny/mdx-plugins'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { ReactNode } from 'react'
 
-const discussUrl = (path) =>
+const discussUrl = (path: string) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {

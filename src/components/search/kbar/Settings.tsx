@@ -1,11 +1,12 @@
 import { fallbackLng, secondLng } from 'app/[locale]/i18n/locales'
 import { Monitor, Moon, Sun } from 'components/theme/icons'
+import { TFunction } from 'i18next'
 import { SettingsIcon } from '../icons'
 import LangButton from './LangButton'
 import ThemeButton from './ThemeButton'
 
 interface SettingsProps {
-  t: (key: string) => string
+  t: TFunction<'common', undefined>
   handleThemeChange: (theme: string) => void
   handleLinkClick: (locale: string) => void
 }

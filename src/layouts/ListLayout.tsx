@@ -11,7 +11,7 @@ import { POSTS_PER_PAGE } from 'data/postsPerPage'
 import { motion } from 'framer-motion'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
-import { useMemo, useState } from 'react'
+import { Key, useMemo, useState } from 'react'
 import Pagination from './Pagination'
 
 interface PaginationProps {
@@ -72,7 +72,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
     setCurrentPage(1)
   }
 
-  const tagCountMap = tagData[locale]
+  const tagCountMap: { [key: string]: number } = tagData[locale]
 
   const filteredTags = Object.keys(tagCountMap).map((postTag) => {
     return (
@@ -144,7 +144,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                               </Link>
                             </div>
                             <ul className="flex flex-wrap">
-                              {tags.map((t) => (
+                              {tags.map((t: string) => (
                                 <li key={t} className="my-3">
                                   <button
                                     onClick={() => handleTagClick(t)}

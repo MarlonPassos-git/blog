@@ -137,10 +137,10 @@ export default async function Page(props: BlogPageProps) {
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = await getPostFromParams(params)
+  const post = (await getPostFromParams(params)) as Blog
   const author = allAuthors.filter((a) => a.language === locale).find((a) => a.default === true)
   const authorList = post.authors || author
-  const authorDetails = authorList.map((author) => {
+  const authorDetails = authorList.map((author: any) => {
     const authorResults = allAuthors
       .filter((a) => a.language === locale)
       .find((a) => a.slug.includes(author))
@@ -148,14 +148,14 @@ export default async function Page(props: BlogPageProps) {
   })
   const mainContent = coreContent(post)
   const jsonLd = post.structuredData
-  jsonLd['author'] = authorDetails.map((author) => {
+  jsonLd['author'] = authorDetails.map((author: any) => {
     return {
       '@type': 'Person',
       name: author.name,
     }
   })
 
-  const Layout = layouts[post.layout || defaultLayout]
+  const Layout = layouts[(post.layout as keyof typeof layouts) ?? defaultLayout]
 
   return (
     <>

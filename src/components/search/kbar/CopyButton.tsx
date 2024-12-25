@@ -1,10 +1,11 @@
+import { TFunction } from 'i18next'
 import { CopyToClipboard } from '../icons'
 
 interface CopyButtonProps {
   show: boolean
   copyUrl: () => void
   showCopied: boolean
-  t: (key: string) => string
+  t: TFunction<'common', undefined>
 }
 
 const CopyButton: React.FC<CopyButtonProps> = ({ show, copyUrl, showCopied, t }) => (

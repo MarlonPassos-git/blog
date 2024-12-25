@@ -3,6 +3,7 @@
   "version": "2.2.0",
   "private": true,
   "scripts": {
+    "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "start": "next dev",
     "dev": "next dev",
     "build": " next build && node ./scripts/postbuild.mjs",
