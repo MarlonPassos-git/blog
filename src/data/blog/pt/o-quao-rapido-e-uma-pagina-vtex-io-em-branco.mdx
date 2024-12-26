@@ -1,6 +1,6 @@
 ---
 title: O quão rápido é uma pagina vazia da VTEX IO
-date: '2022-12-24'
+date: '2024-12-24'
 language: pt
 tags: ['vtex', 'vtex io', 'peformace', "lightouse"]
 authors: ['marlonPassos']
@@ -8,18 +8,53 @@ draft: true
 summary: Analisando o desempenho de uma página inicial em branco do VTEX IO removendo todo o conteúdo e otimizações.
 ---
 
-Muitas vezes passamos horas e horas sofrendo ajustando alguns coisa no código para tentar conseguir ganhar alguns pontos nos relatorios de peformace do ligouse. Trabalhando com VTEX IO as coisas pioram mais ainda, pois não temos o controle do empacotador, nem do framework que roda por debaixo dos panos. Tem uma lenda de que é impossível pegar +90 pontos no mobile. 
+Muitas vezes passamos horas e horas sofrendo ajustando algo no código para tentar conseguir ganhar alguns pontos nos relatorios de peformace do ligouse. Trabalhando com VTEX IO as coisas pioram mais ainda, pois não temos o controle do empacotador, nem do framework que roda por debaixo dos panos. Tem uma lenda de que é impossível pegar +90 pontos no mobile. 
 
 Por isso, quis tirar a limpo e saber o quão rápido é uma página home VTEX IO sem nada 🤔. Pensa comigo, num mundo utópico em que você consiga otimizar todo o componentes JS, CSS ele nunca vai ficar mais rápido do que uma página vazia sem nada. Por isso, eu quis tirar a prova a limpo.  
+
+> [!NOTE]
+> Nesse artigou vou abordar apenas o desempenho no mobile, pois geralmente esse o foco de otimização de desempenho e onde realmente é o maior desafio.
+> E por questões de "estabilidade" o relatorios vão ser gerados sempre da home que é a página mais acessada de um site. Porem sei que paginas de produto ou de categoria  em branco poderiam ser mais lentas devido a providers específicos de cada página. Porem nesse artigo vou focar apenas na home.
+
 ## Setup 
+
+### Criando um APP e workspace:
+
+Usando o comando `vtex init` criei um template de loja. 
+
+```bash
+vtex init
+```
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/1.png)
+
+Crei um novo workspace
+
+```bash
+vtex use blackpagea --production
+```
+
+Desistalei o store APP que ja existia no workspace
+
+```bash
+vtex uninstall {account}.{app_name}
+```
+
+Ate que eu no meu workspace eu tenha somente o conteudo inicial do template
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/2.png)
+
 
 ### Removendo conteúdo da página:
 
-Para fazer esse teste, eu peguei a página home e comentei todo o conteúdo dela:
+Para fazer esse teste, eu limpei todo o conteudo da página home
 
-```json
+```json:store/blocks/home.jsonc
+{
 	"store.home": {
-		"blocks": [],
+		"blocks": [
+      "rich-text#home"
+    ],
 		"parent": {
 			"header": "flex-layout.row#nothing",
 			"footer": "flex-layout.row#nothing"
@@ -29,12 +64,25 @@ Para fazer esse teste, eu peguei a página home e comentei todo o conteúdo dela
 		"children": [],
 		"props": {}
 	},
+  "rich-text#home": {
+    "props": {
+      "text": "blank page"
+    }
+  }
+}
 ```
 
-### Removendo classes utilitárias
-No arquivo `style.json` apaguei todas as cores / tamanhos que poderiam gerar classes customizadas com o builder do [tachyons](https://github.com/tachyons-css/tachyons/)
+> [!NOTE]
+> Acabei deixando um bloco de texto com a mensagem "blank page" pois sem nenhum conteúdo o lighouse simplemente não consegue fazer a análise.
+> <details>  
+>   <summary> asdfas </summary>
+>   <img src="/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/5.png" alt="lighouse mostrando que não consegue carregar se não tiver nenhum conteudo" width="100%"/>
+> </details>
 
-```json
+### Removendo classes utilitárias
+Apaguei todas as cores / tamanhos que poderiam gerar classes customizadas com o builder do [tachyons](https://github.com/tachyons-css/tachyons/)
+
+```json:store/styles/configs/style.json
 {
 	"typeScale": [3, 2.25, 1.5, 1.25, 1, 0.875, 0.75],
 	"spacing": [0.125, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 8, 16],
@@ -70,18 +118,18 @@ No arquivo `style.json` apaguei todas as cores / tamanhos que poderiam gerar cla
 ```
 ### Removendo fontes:  
 
-No arquivo `font-face.css` apaguei todas as fontes cadastradas 
+Apaguei todas as fontes cadastradas
 
-```css
-// nothing
+```css:styles/configs/font-face.css
+/* nothing */
 ```
 
 ### Diminuindo o tamanho do SVG Sprites. 
 
-No arquivo `iconpack.svg` apaguei o conteúdo de todas as tags `<g> ... </g>`
+Apaguei o conteúdo de todas as tags `g`
 
-```svg
-<svg class="dn" height="0" version="1.1" width="0" xmlns="http://www.w3.org/2000/svg">
+```svg:styles/iconpacks/iconpack.svg
+<svg xmlns="http://www.w3.org/2000/svg" class="dn" height="0" version="1.1" width="0">
   <defs>
     <g id="hpa-arrow-from-bottom"/>
     <g id="bnd-logo"/>
@@ -96,8 +144,7 @@ No arquivo `iconpack.svg` apaguei o conteúdo de todas as tags `<g> ... </g>`
     <g id="sti-volume-off"/>
     <g id="hpa-profile"/>
     <g id="hpa-save"/>
-    <g id="hpa-search">
-    </g>
+    <g id="hpa-search"/>
     <g id="hpa-hamburguer-menu"/>
     <g id="hpa-location-marker"/>
     <g id="hpa-telemarketing"/>
@@ -145,8 +192,7 @@ No arquivo `iconpack.svg` apaguei o conteúdo de todas as tags `<g> ... </g>`
     <g id="mpa-angle--down"/>
     <g id="mpa-angle--up"/>
     <g id="mpa-location-input"/>
-    <g id="inf-star">
-    </g>
+    <g id="inf-star"/>
     <g id="inf-help--outline"/>
     <g id="inf-help--filled"/>
     <g id="inf-tooltip--outline"/>
@@ -155,46 +201,183 @@ No arquivo `iconpack.svg` apaguei o conteúdo de todas as tags `<g> ... </g>`
     <g id="inf-warning--filled"/>
     <g id="nav-caret--down"/>
     <g id="nav-caret--left"/>
-    <g id="nav-caret--right">
-    </g>
-    <g id="nav-caret--up">
-    </g>
-    <g id="nav-thin-caret--left">
-    </g>
-    <g id="nav-thin-caret--right">
-    </g>
+    <g id="nav-caret--right"/>
+    <g id="nav-caret--up"/>
+    <g id="nav-thin-caret--left"/>
+    <g id="nav-thin-caret--right"/>
     <g id="nav-arrow--left"/>
     <g id="nav-arrow--right"/>
-    <g id="nav-home"></g>
+    <g id="nav-home"/>
     <g id="nav-plus"/>
     <g id="nav-minus"/>
     <g id="sti-loading"/>
     <g id="sti-check--line"/>
     <g id="sti-check--outline"/>
     <g id="sti-check--filled"/>
-    <g id="sti-close--line"></g>
+    <g id="sti-close--line"/>
     <g id="sti-close--outline"/>
     <g id="sti-close--filled"/>
     <g id="sti-clock"/>
     <g id="sti-equals"/>
     <g id="sti-discount"/>
-<g id="busca"></g>
+  </defs>
 </svg>
 ```
 
 > [!NOTE]
-> Highlights information that users should take into account, even when skimming.
-
-> NOTE
-> Highlights information that users should take into account, even when skimming.
-
-### Ativando configurações de desempenho no Admin da VTEX. 
-
-Ao acessar `/admin/cms/store` tenho algumas opções de performance ativas:
-
-![[Untitled design.jpg]]
-
+> Eu não apaguei as tags `g` por completo, pois se algum desses ids estiver faltando o builder do VTEX IO vai estar adicionando um `g` com o conteudo padrão de cada ícone. Assim eu consigo minimizar o tamanho de elementos criados.
 
 ### Apagando todos os CSS
 
-Vou no diretório `css` e apago todos os arquivos.  `*.css` 
+Vou no diretório `styles/css` e apago todos os arquivos `*.css`.
+
+```bash	
+rm -fr ./styles/css/*
+```
+
+### Ativando configurações de desempenho no Admin da VTEX. 
+
+Ao acessar `/admin/cms/store` na aba "Avançado" ativos todas as opções de desempenho disponiveis:
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/3.png)
+
+### Publicando o APP
+
+```bash 
+vtex release patch beta
+vtex publish
+vtex install
+```
+
+Depois de todos esses setup temos uma bela página em branco com o mínimo de conteúdo possível para um APP VTEX IO.
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/4.png)
+
+## Gerando relatório de desempenho
+
+### Usando dev tools do chrome
+
+Abrindo o meu navegador chrome num perfil de visitante gero um relatorios pelo proprios devtools do chrome nas seguinter configurações:
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/6.png)
+
+E acabei conseguindo o seguinte resultado: 
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/2.gif)
+
+### Usando LHCI
+
+Por parecer bem abaixo do que eu esperava, fui tentar gerar um relatorios mais agnostico usando o [LHCI](https://github.com/GoogleChrome/lighthouse-ci) uma ferramenta de linha de comando que gera relatorios de desempenho do lighouse.
+
+Primeio eu faço a instalação do LHCI com o comando:
+
+```bash
+npm i @lhci/cli -g
+```
+
+instalo algumas dependencias
+
+```bash
+npm init -y 
+npm install dotenv
+```
+
+Depois crio um arquivo de configuração `.lighthouserc.cjs`, usando [uma configuração recomendada](https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/configuration.md#the-complete-experience) como base, com mais algumas configurações que fiz para poder rodar o teste num workspace VTEX IO que não é publico.
+
+```js:.lighthouserc.cjs	
+require('dotenv').config()
+
+const { CHROME_PATH, VTEX_TOKEN } = process.env;
+
+if (!CHROME_PATH) {
+	throw new Error("CHROME_PATH is required");
+}
+if (!VTEX_TOKEN) {
+	throw new Error("VTEX_TOKEN is required");
+}
+
+module.exports = {
+	ci: {
+		collect: {
+			chromePath: CHROME_PATH,
+			settings: {
+				extraHeaders: JSON.stringify({ // Cookies necessários para acessar o workspace
+					Cookie: `VtexIdclientAutCookie=${VTEX_TOKEN}`,
+				}),
+				"additive": "true",
+			},
+			url: [
+				"https://blackpageproduction--marlonpassos.myvtex.com",
+			],
+			numberOfRuns: 5,
+		},
+		assert: {
+			"preset": "lighthouse:recommended",
+			"assertions": {
+				"first-contentful-paint": [
+					"error",
+					{ "maxNumericValue": 2000, "aggregationMethod": "optimistic" }
+				],
+				"interactive": ["error", { "maxNumericValue": 5000, "aggregationMethod": "optimistic" }]
+			}
+		},
+		upload: {
+			target: "temporary-public-storage",
+		},
+	},
+};
+```
+
+```txt:.env
+# Run `vtex local token` to get your VTEX_TOKEN
+VTEX_TOKEN=xxxxxxxx
+# Run `which google-chrome` to get the path to your Chrome executable
+CHROME_PATH=/usr/bin/google-chrome
+```
+
+Depois de tudo configurado, eu rodo o comando:
+
+```bash
+npx lhci autorun --config=.lighthouserc.cjs
+```
+
+E acabo conseguindo o seguinte resultado:
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/1.gif)
+
+Pelo visto, da para pegar 100 pontos no mobile, nada mal para uma página em branco 😅.
+
+### Pagespeed
+
+> [!NOTE]
+> Eu ate gostaria de rodar o pagespeed, mas infelizmente o pagespeed não consegue acessar um workpace .
+
+
+
+## Difenças entre os relatórios
+
+Analisando os JSONs gerados do relatorios de desempenho de cada um tento entender o que foi feito de diferente entre os dois.
+Olhando a propriedade `configSettings` noto apenas essas diferenças:
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/8.png)
+
+As propriedades `channel` e `extraHeaders` não tem muito oque fazer pois realmente vão ficar diferentes em cada ambiente. A unica grande diferença em si é com a propriedade `screenEmulation.disables` que infelizemnte não consegui usar no ambiente de CLI pois sempre que eu ha habilitava a pagina pedia os cookies de autenticação oque inviabilizava o teste.
+
+Porem mesmo assim fico na curiosidade de entender a disprepancia de 31 pontos entre os dois relatórios 🤔.
+
+## Conclusão
+
+Acho que o resultado foi bem interessante, e mostra que é possível sim conseguir 100 pontos no mobile, mesmo que seja com uma página em branco.
+
+Porem vale apontar que mesmo com uma pagina em branco no relatorio de peformace ainda sim relata varios pontos: 
+
+![](/blog/o-quao-rapido-e-uma-pagina-vtex-io-em-branco/9.png)
+
+Oque mostra que VTEX IO tem problemas de peformace intricincos ao framowork web, que num mundo ideal não deveria existir.
+
+Acho importante sabermos dessas limitações para que não percamos nosso tempo tentando otimizar algo que não temos controle.
+
+E claro mais importante é pela nossas experiencia, é muito pouco provavel que uma loja real com varios componentes, logicas de negocio, diversos scripts de terceiro e conteudo consiga pegar +90 pontos no mobile, mas é sempre bom tentar 😅. Mas tambem não significar que se o site que voce esta mexendo tem 1 ponto de permace a culpa não é so do framework.
+
+E uma boa dicas que podemos tirar disso que sempre que formos fazer algum processo de otimização, podemos estar removendos parte dos conteudos do site (nõa precisar ser tudo), mas sim talvez deixar so o header e footer e ver o quanto o eccomerce que voce trabalha é rapido.	E ai disso talvz você consiga ter uma ideia de quanto o seu site poderia ser rapido.
+
